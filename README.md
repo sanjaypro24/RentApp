@@ -53,7 +53,7 @@ RentApp is a rental service application that allows users to rent cars and books
 - Separate interfaces like `IUserService`, `IBookService` ensure each service has only relevant methods.
 
 ### 5. **Dependency Inversion Principle (DIP)**
-- Uses dependency injection to decouple components (`IUserRepository`, `IValidator<User>`, etc.).
+- Uses dependency injection to decouple components (`IUserRepository`).
 
 ## Pricing Logic
 - **Base Price:** ₹150 per book.
