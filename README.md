@@ -1,49 +1,67 @@
-RentApp
+## Overview
+RentApp is a rental service application that allows users to rent cars and books. It follows the **SOLID** principles for maintainability and scalability. The project is structured into multiple layers, including API, Services, Repository, and Validator.
 
-RentApp is a rental service application that allows users to rent books and cars while incorporating discount mechanisms based on customer type and vehicle engine type. The application follows the SOLID design principles to ensure maintainability and scalability.
+## Installation
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-repo/RentApp.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd RentApp
+   ```
+3. Restore dependencies:
+   ```sh
+   dotnet restore
+   ```
+4. Update the database connection string in `appsettings.json`.
+5. Run the application:
+   ```sh
+   dotnet run --project RentApp.Api
+   ```
+6. Open Swagger UI to test endpoints: `https://localhost:<port>/swagger`
 
-Features
+## API Endpoints
+### User Endpoints
+- **GET** `/api/user` - Get all users
+- **GET** `/api/user/{id}` - Get user by ID
+- **POST** `/api/user` - Create a user
+- **DELETE** `/api/user/{id}` - Delete user
 
-User, Book, and Car rental management
+### Book Endpoints
+- **GET** `/api/book` - Get all books
+- **POST** `/api/book` - Create book
 
-Discount calculation based on customer type and vehicle engine type
+### RideCar Endpoints
+- **GET** `/api/ridecar` - Get all rides
+- **POST** `/api/ridecar` - Create ride
 
-Price calculation including duration and location-based discounts
+## SOLID Principles in RentApp
+### 1. **Single Responsibility Principle (SRP)**
+- Controllers only handle HTTP requests.
+- Services contain business logic.
+- Repositories interact with the database.
+- Validators ensure input correctness.
 
-Implements SOLID principles for maintainability
+### 2. **Open/Closed Principle (OCP)**
+- New discount types (e.g., `DiscountCustomer`, `EngineDiscount`) can be added without modifying existing code.
 
-API Endpoints
+### 3. **Liskov Substitution Principle (LSP)**
+- `DiscountableCustomer` and `NonDiscountableCustomer` follow LSP, allowing interchangeable usage.
 
-User
+### 4. **Interface Segregation Principle (ISP)**
+- Separate interfaces like `IUserService`, `IBookService` ensure each service has only relevant methods.
 
-GET /api/user - Get all users
+### 5. **Dependency Inversion Principle (DIP)**
+- Uses dependency injection to decouple components (`IUserRepository`, `IValidator<User>`, etc.).
 
-POST /api/user - Create a new user
+## Pricing Logic
+- **Base Price:** ₹150 per book.
+- **Final Price Calculation:**
+  ```csharp
+  totalPrice = BasePrice * Quantity;
+  totalPrice -= discountCalculator.ApplyDiscount(customerType);
+  ```
 
-Book
-
-GET /api/book - Get all books
-
-POST /api/book - Add a new book
-
-RideCar
-
-GET /api/ridecar - Get all rental cars
-
-POST /api/ridecar - Rent a car
-
-Price Calculation
-
-The PriceCalculator applies:
-
-Base price per hour: 45
-
-Location discount: Chennai gets 10% off
-
-Engine-based discount: Applied in EngineDiscount
-
-Customer-based discount:
-
-NormalCustomer: 5% off
-
-PremiumCustomer: 10% off
+## License
+This project is open-source and available under the [MIT License](LICENSE).
