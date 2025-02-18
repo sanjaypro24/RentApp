@@ -41,7 +41,7 @@ RentApp is a rental service application that allows users to rent cars and books
 - Controllers only handle HTTP requests.
 - Services contain business logic.
 - Repositories interact with the database.
-- Validators ensure input correctness.
+
 
 ### 2. **Open/Closed Principle (OCP)**
 - New discount types (e.g., `DiscountCustomer`, `EngineDiscount`) can be added without modifying existing code.
